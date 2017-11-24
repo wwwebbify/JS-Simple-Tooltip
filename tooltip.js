@@ -18,6 +18,7 @@
     var Yoffset = -7;
     var bindToScreen = false;
 
+    //Calculates the style for the tooltip
     function tooltipLocation(e) {
         var style = {
             'position': 'fixed',
@@ -35,6 +36,7 @@
         return str;
     }
 
+    //Calculates the style for the pointer
     function pointerLocation() {
         var style = {
             'background': 'inherit',
@@ -62,9 +64,11 @@
         return str;
     }
 
+    //Creates new tooltip and attaches it to the DOM, adds event listener 'mousemove'
     function makeTooltip(e) {
 
         if (this.hasTooltip === false) {
+            //Check for hasTooltip control
 
             //create main tool tip
             var tip = this.tip = document.createElement('tooltip');
@@ -82,25 +86,30 @@
             tip.appendChild(pointer);
         }
         this.addEventListener('mousemove', moveTooltip);
-        this.hasTooltip = true;
+        this.hasTooltip = true; //Deactivates makeTooltip()
     }
 
+    //Deletes the tooltip, removes event listener 'mousemove'
     function deleteTooltip() {
         var tip = this.querySelector('.tooltip');
         tip.parentNode.removeChild(tip);
-        this.hasTooltip = false;
+        this.removeEventListener('mousemove', moveTooltip);
+
+        this.hasTooltip = false; //Activates makeTooltip()
     }
 
     function moveTooltip(e) {
         this.tip.setAttribute('style', tooltipLocation.call(this.tip, e));
     }
 
+    //Find all elements with the data-tooltip attribute
     var tooltipable = document.querySelectorAll('[data-tooltip]');
 
+    //Loop through the tooltipable elements, determine bindToScreen option, add event listeners, and set hasTooltip control
     tooltipable.forEach(function (el) {
         el.bindToScreen = bindToScreen ? true : el.getAttribute('data-bindToScreen') === 'true';
         el.addEventListener('mouseover', makeTooltip);
         el.addEventListener('mouseleave', deleteTooltip);
-        el.hasTooltip = false;
+        el.hasTooltip = false; //Activates makeTooltip()
     });
 })();
