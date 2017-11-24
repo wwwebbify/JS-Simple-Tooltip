@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tooltip</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap:wrap;
+            height:1000px;
+        }
+
+        div {
+            /*width: 200px;*/
+            background: lightcyan;
+            margin: 50px;
+            padding:10px;
+            border: 1px solid #000;
+            text-align: center;
+        }
+        
+        .tooltip{
+            width:200px;
+            padding:10px;
+            margin:0;
+            background: cyan;
+            border: 1px solid cyan;
+            border-radius:5px;
+        }
+    </style>
+</head>
+<body>
+
+<div data-tooltip="This is tooltip 1" data-bindToScreen="true">
+    Element 1
+</div>
+<div data-tooltip="This is tooltip 2">
+    medium Element 2
+</div>
+<div data-tooltip="This is a super super super long tooltip 3">
+    a much much much longer Element 3
+</div>
+<div>
+    none tool tip Element 4
+</div><div>
+    none tool tip Element 4
+</div>
+
+</body>
+
+<script src="tooltip.js"></script>
+</html>
